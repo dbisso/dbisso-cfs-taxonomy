@@ -1,4 +1,4 @@
-dbisso-cfs-taxonomy
+CFS Taxonomy Add-on
 ===================
 
-Adds a taxonomy field to the Custom Field Suite WordPress plugin  
+Adds a taxonomy field to the Custom Field Suite WordPress plugin
