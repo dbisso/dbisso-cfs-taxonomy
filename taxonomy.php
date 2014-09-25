@@ -5,11 +5,10 @@
  */
 class cfs_taxonomy extends cfs_field
 {
-    function __construct($parent)
+    function __construct()
     {
         $this->name = 'taxonomy';
         $this->label = __('Taxonomy', 'cfs');
-        $this->parent = $parent;
     }
 
     function options_html($key, $field)
@@ -80,7 +79,7 @@ class cfs_taxonomy extends cfs_field
         } else {
             wp_dropdown_categories(
                 array(
-                    'selected'         => $field->value[0],
+                    'selected'         => $field->value,
                     'taxonomy'         => $taxonomy_name,
                     'hide_empty'       => 0,
                     'name'             => $field->input_name,
