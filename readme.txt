@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== CFS Taxonomy Field Add-on ===
 Contributors: dbisso
 Tags: Custom Field Suite, CFS, taxonomy
 Requires at least: 3.9
