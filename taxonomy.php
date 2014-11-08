@@ -79,7 +79,7 @@ class cfs_taxonomy extends cfs_field
         } else {
             wp_dropdown_categories(
                 array(
-                    'selected'         => $field->value,
+                    'selected'         => $field->value[0],
                     'taxonomy'         => $taxonomy_name,
                     'hide_empty'       => 0,
                     'name'             => $field->input_name,
