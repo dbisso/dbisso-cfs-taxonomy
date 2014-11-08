@@ -1,0 +1,14 @@
+{
+    "name": "dbisso/wp-cfs-taxonomy-field",
+    "description": "Adds a taxonomy field to the Custom Field Suite WordPress plugin",
+    "license": "GPL-2.0",
+    "authors": [
+        {
+            "name": "Dan Bissonnet",
+            "email": "dan@danisadesigner.com"
+        }
+    ],
+    "require": {
+
+    }
+}
