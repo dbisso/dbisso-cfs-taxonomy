@@ -69,7 +69,7 @@ class cfs_taxonomy extends cfs_field {
 				array(
 					'taxonomy' => $taxonomy_name,
 					'walker' => $walker,
-					'selected_cats' => $field->value,
+					'selected_cats' => ! is_array( $field->value ) ? array( $field->value ) : $field->value,
 				)
 			);
 		} else {
