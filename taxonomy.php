@@ -5,11 +5,10 @@
  */
 class cfs_taxonomy extends cfs_field
 {
-    function __construct($parent)
+    function __construct()
     {
         $this->name = 'taxonomy';
         $this->label = __('Taxonomy', 'cfs');
-        $this->parent = $parent;
     }
 
     function options_html($key, $field)
@@ -27,7 +26,7 @@ class cfs_taxonomy extends cfs_field
             </td>
             <td>
                 <?php
-                    $this->parent->create_field(array(
+                    CFS()->create_field(array(
                         'type' => 'select',
                         'input_name' => "cfs[fields][$key][options][taxonomy]",
                         'options' => array(
@@ -45,7 +44,7 @@ class cfs_taxonomy extends cfs_field
             </td>
             <td>
                 <?php
-                    $this->parent->create_field(array(
+                    CFS()->create_field(array(
                         'type' => 'true_false',
                         'input_name' => "cfs[fields][$key][options][multiple]",
                         'value' => $this->get_option($field, 'multiple', 0),
