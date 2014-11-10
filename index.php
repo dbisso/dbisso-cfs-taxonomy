@@ -13,17 +13,17 @@ Domain Path: /languages
 */
 
 class DBissoCFSTaxonomyAddon {
-	static function bootstrap() {
+	public static function bootstrap() {
 		add_filter( 'cfs_field_types', array( __CLASS__, 'cfs_field_types' ) );
 		add_action( 'plugins_loaded', array( __CLASS__, 'load_plugin_textdomain' ) );
 	}
 
-	static function cfs_field_types( $field_types ) {
+	public static function cfs_field_types( $field_types ) {
 		$field_types['taxonomy'] = dirname( __FILE__ ) . '/taxonomy.php';
 		return $field_types;
 	}
 
-	static function load_plugin_textdomain() {
+	public static function load_plugin_textdomain() {
 		load_plugin_textdomain(
 			'dbisso-cfs-taxonomy-field',
 			false,
