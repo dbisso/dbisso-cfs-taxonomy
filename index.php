@@ -6,7 +6,10 @@ Description: A taxonomy field type for Custom Field Suite (add-on).
 Version: 1.1.0
 Author: Dan Bissonnet
 Author URI: http://danisadesigner.com
-License: GPL2
+License: GPL-2.0
+License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+Text Domain: dbisso-cfs-taxonomy-field
+Domain Path: /languages
 */
 
 class DBissoCFSTaxonomyAddon {
