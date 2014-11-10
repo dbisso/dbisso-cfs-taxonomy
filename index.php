@@ -27,7 +27,7 @@ class DBissoCFSTaxonomyAddon {
 		load_plugin_textdomain(
 			'dbisso-cfs-taxonomy-field',
 			false,
-			__FILE__ . '/languages/'
+			dirname( plugin_basename( __FILE__ ) ) . '/languages/'
 		);
 	}
 }
