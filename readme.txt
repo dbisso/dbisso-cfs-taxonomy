@@ -3,7 +3,7 @@ Contributors: dbisso
 Tags: Custom Field Suite, CFS, taxonomy
 Requires at least: 3.9
 Tested up to: 4.0
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,10 @@ Follow development on [GitHub](https://github.com/dbisso/dbisso-cfs-taxonomy)
 
 
 == Changelog ==
+
+= 1.1.0 =
+* Add .pot file for translations
+* Fix incorrect gettext domain
 
 = 1.0.0 =
 * Initial release

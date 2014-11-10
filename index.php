@@ -3,7 +3,7 @@
 Plugin Name: CFS Taxonomy Field Add-on
 Plugin URI: http://danisadesigner.com
 Description: A taxonomy field type for Custom Field Suite (add-on).
-Version: 1.0.0
+Version: 1.1.0
 Author: Dan Bissonnet
 Author URI: http://danisadesigner.com
 License: GPL2
