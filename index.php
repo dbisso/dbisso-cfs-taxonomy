@@ -15,7 +15,7 @@ Domain Path: /languages
 class DBissoCFSTaxonomyAddon {
 	static function bootstrap() {
 		add_filter( 'cfs_field_types', array( __CLASS__, 'cfs_field_types' ) );
-		add_filter( 'plugins_loaded', array( __CLASS__, 'load_plugin_textdomain' ) );
+		add_action( 'plugins_loaded', array( __CLASS__, 'load_plugin_textdomain' ) );
 	}
 
 	static function cfs_field_types( $field_types ) {
