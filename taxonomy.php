@@ -6,7 +6,7 @@
 class cfs_taxonomy extends cfs_field {
 	function __construct() {
 		$this->name = 'taxonomy';
-		$this->label = __( 'Taxonomy', 'cfs' );
+		$this->label = __( 'Taxonomy', 'dbisso-cfs-taxonomy-field' );
 	}
 
 	function options_html( $key, $field ) {
@@ -19,7 +19,7 @@ class cfs_taxonomy extends cfs_field {
 		?>
 		<tr class="field_option field_option_<?php esc_attr_e( $this->name ) ?>">
 			<td class="label">
-				<label><?php _e( 'Taxonomy', 'cfs' ); ?></label>
+				<label><?php _e( 'Taxonomy', 'dbisso-cfs-taxonomy-field' ); ?></label>
 			</td>
 			<td>
 				<?php
@@ -37,7 +37,7 @@ class cfs_taxonomy extends cfs_field {
 		</tr>
 		<tr class="field_option field_option_<?php esc_attr_e( $this->name ) ?>">
 			<td class="label">
-				<label><?php _e( 'Multiple Terms', 'cfs' ); ?></label>
+				<label><?php _e( 'Multiple Terms', 'dbisso-cfs-taxonomy-field' ); ?></label>
 			</td>
 			<td>
 				<?php
@@ -81,7 +81,7 @@ class cfs_taxonomy extends cfs_field {
 					'name'             => $field->input_name,
 					'orderby'          => 'name',
 					'hierarchical'     => 1,
-					'show_option_none' => '&mdash; ' . __( 'Choose', 'cfs_taxonomy_field' ) . ' &mdash;'
+					'show_option_none' => '&mdash; ' . __( 'Choose', 'dbisso-cfs-taxonomy-field' ) . ' &mdash;'
 				)
 			);
 		}

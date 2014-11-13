@@ -8,8 +8,9 @@ class cfs_category_checklist_walker extends Walker_Category_Checklist {
 	function start_el( &$output, $category, $depth = 0, $args = array(), $id = 0 ) {
 		extract( $args );
 
-		if ( empty( $taxonomy ) )
+		if ( empty( $taxonomy ) ) {
 			$taxonomy = 'category';
+		}
 
 		$name = $this->field_name;
 
