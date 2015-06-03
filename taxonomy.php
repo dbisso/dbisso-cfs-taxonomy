@@ -124,11 +124,24 @@ class cfs_taxonomy extends cfs_field {
 		echo '</ul>';
 	}
 
-	function pre_save( $value, $field ) {
+	/**
+	 * Serializes our field value before it is saved.
+	 *
+	 * @param  $value mixed the value to be saved to the database.
+	 * @param  $field object the current CFS field object
+	 * @return $value object a serialized value object.
+	 */
+	function pre_save( $value, $field = null ) {
 		return serialize( $value );
 	}
 
-	function prepare_value( $value, $field ) {
+	/**
+	 * Unserializes our field value before it is passed to the CFS API.
+	 *
+	 * @param  $value mixed the value to be passed to the API.
+	 * @param  $field object the current CFS field object
+	 * @return $value object a serialized value object.	 */
+	function prepare_value( $value, $field = null ) {
 		return unserialize( $value[0] );
 	}
 
@@ -136,15 +149,16 @@ class cfs_taxonomy extends cfs_field {
 	 * Returns the value for the API.
 	 *
 	 * In this case, the term IDs are converted into and array of term objects.
-	 * @return array        An array of term objects
+	 *
+	 * @return array An array of term objects
 	 */
-	function format_value_for_api( $value, $field ) {
+	function format_value_for_api( $value, $field = null ) {
 		$output = null;
 
 		// Store the taxonomy name so we don't need to find it for each term
 		$this->taxonomy_name = $this->get_option( $field, 'taxonomy' );
 
-		if ( ! empty($value) ) {
+		if ( ! empty( $value ) ) {
 			$output = array_map( array( $this, 'get_term_for_api' ), $value );
 		}
 
