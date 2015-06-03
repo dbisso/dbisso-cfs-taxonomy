@@ -63,7 +63,7 @@ class cfs_taxonomy extends cfs_field {
 		if ( ! empty($taxonomy_name) && $multiple ) {
 			$walker = new cfs_category_checklist_walker;
 			$walker->field_name = $field->input_name;
-
+			echo '<ul>';
 			wp_terms_checklist(
 				null,
 				array(
@@ -72,6 +72,7 @@ class cfs_taxonomy extends cfs_field {
 					'selected_cats' => ! is_array( $field->value ) ? array( $field->value ) : $field->value,
 				)
 			);
+			echo '</ul>';
 		} else {
 			wp_dropdown_categories(
 				array(
