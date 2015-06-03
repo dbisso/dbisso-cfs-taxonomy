@@ -4,13 +4,20 @@
  * A CFS field that allows the user to choose one or more terms from a given taxonomy
  */
 class cfs_taxonomy extends cfs_field {
+
 	function __construct() {
-		$this->name = 'taxonomy';
+		$this->name  = 'taxonomy';
 		$this->label = __( 'Taxonomy', 'dbisso-cfs-taxonomy-field' );
 	}
 
+	/**
+	 * Displays the HTML for our field options when building a field group.
+	 *
+	 * @param  $field object the current CFS field object
+	 * @return void
+	 */
 	function options_html( $key, $field ) {
-		$choices = array();
+		$choices    = array();
 		$taxonomies = array_map( 'get_taxonomy', get_taxonomies() );
 
 		foreach ( $taxonomies as $name => $taxonomy ) {
@@ -24,10 +31,10 @@ class cfs_taxonomy extends cfs_field {
 			<td>
 				<?php
 					CFS()->create_field(array(
-						'type' => 'select',
+						'type'       => 'select',
 						'input_name' => "cfs[fields][$key][options][taxonomy]",
-						'options' => array(
-							'choices' => $choices,
+						'options'    => array(
+							'choices'      => $choices,
 							'force_single' => true,
 						),
 						'value' => $this->get_option( $field, 'taxonomy', 'default' ),
@@ -42,9 +49,9 @@ class cfs_taxonomy extends cfs_field {
 			<td>
 				<?php
 					CFS()->create_field(array(
-						'type' => 'true_false',
+						'type'       => 'true_false',
 						'input_name' => "cfs[fields][$key][options][multiple]",
-						'value' => $this->get_option( $field, 'multiple', 0 ),
+						'value'      => $this->get_option( $field, 'multiple', 0 ),
 					));
 				?>
 			</td>
@@ -140,16 +147,18 @@ class cfs_taxonomy extends cfs_field {
 	 *
 	 * @param  $value mixed the value to be passed to the API.
 	 * @param  $field object the current CFS field object
-	 * @return $value object a serialized value object.	 */
+	 * @return $value object a serialized value object.
+	 */
 	function prepare_value( $value, $field = null ) {
 		return unserialize( $value[0] );
 	}
 
 	/**
-	 * Returns the value for the API.
+	 * Returns the value for the API. In this case, the term IDs are converted
+	 * into and array of term objects.
 	 *
-	 * In this case, the term IDs are converted into and array of term objects.
-	 *
+	 * @param  $value mixed the value to be passed to the API.
+	 * @param  $field object the current CFS field object
 	 * @return array An array of term objects
 	 */
 	function format_value_for_api( $value, $field = null ) {
@@ -165,8 +174,18 @@ class cfs_taxonomy extends cfs_field {
 		return $output;
 	}
 
+	/**
+	 * Get the term object data for the CFS API.
+	 *
+	 * @param  $term_id mixed the term ID to use for getting a term object.
+	 * @return object a WordPress taxonomy term object.
+	 */
 	function get_term_for_api( $term_id ) {
-		if ( (int) $term_id === -1 ) return false;
-		return get_term( (int) $term_id, $this->taxonomy_name );
+		$id = absint( $term_id );
+		if ( -1 === $id ) {
+			return false;
+		}
+		return get_term( $id, $this->taxonomy_name );
 	}
+
 }
