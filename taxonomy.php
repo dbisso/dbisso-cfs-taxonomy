@@ -52,42 +52,76 @@ class cfs_taxonomy extends cfs_field {
 	<?php
 	}
 
+	/**
+	 * Displays the HTML for our field.
+	 *
+	 * @param  $field object the current CFS field object
+	 * @return void
+	 */
 	function html( $field ) {
-		// Load our custom walker
-		require_once __DIR__ . '/cfs_category_checklist_walker.php';
-
 		$taxonomy_name = $this->get_option( $field, 'taxonomy', 'category' );
-		$multiple      = $this->get_option( $field, 'multiple', 0 );
-		$taxonomy      = get_taxonomy( $taxonomy_name );
 
-		if ( ! empty($taxonomy_name) && $multiple ) {
-			$walker = new cfs_category_checklist_walker;
-			$walker->field_name = $field->input_name;
-			echo '<ul>';
-			wp_terms_checklist(
-				null,
-				array(
-					'taxonomy' => $taxonomy_name,
-					'walker' => $walker,
-					'selected_cats' => ! is_array( $field->value ) ? array( $field->value ) : $field->value,
-				)
-			);
-			echo '</ul>';
-		} else {
-			wp_dropdown_categories(
-				array(
-					'selected'         => $field->value[0],
-					'taxonomy'         => $taxonomy_name,
-					'hide_empty'       => 0,
-					'name'             => $field->input_name,
-					'orderby'          => 'name',
-					'hierarchical'     => 1,
-					'show_option_none' => '&mdash; ' . __( 'Choose', 'dbisso-cfs-taxonomy-field' ) . ' &mdash;'
-				)
-			);
+		if ( empty( $taxonomy_name ) ) {
+			return;
 		}
 
+		$this->multi_select( $field, $taxonomy_name );
+		$this->single_select( $field, $taxonomy_name );
+	}
 
+	/**
+	 * Outputs HTML for a drop-down select taxonomy input.
+	 *
+	 * @param  $field object the current CFS field object
+	 * @param  $taxonomy_name string the name of the taxonomy to get terms from.
+	 * @return void
+	 */
+	function single_select( $field, $taxonomy_name ) {
+		if ( $this->get_option( $field, 'multiple', 0 ) ) {
+			return;
+		}
+
+		wp_dropdown_categories(
+			array(
+				'selected'         => $field->value[0],
+				'taxonomy'         => $taxonomy_name,
+				'hide_empty'       => 0,
+				'name'             => $field->input_name,
+				'orderby'          => 'name',
+				'hierarchical'     => 1,
+				'show_option_none' => '&mdash; ' . __( 'Choose', 'dbisso-cfs-taxonomy-field' ) . ' &mdash;'
+			)
+		);
+	}
+
+	/**
+	 * Outputs HTML for a multi-select checkbox input.
+	 *
+	 * @param  $field object the current CFS field object
+	 * @param  $taxonomy_name string the name of the taxonomy to get terms from.
+	 * @return void
+	 */
+	function multi_select( $field, $taxonomy_name ) {
+		if ( ! $this->get_option( $field, 'multiple', 0 ) ) {
+			return;
+		}
+
+		require_once __DIR__ . '/cfs_category_checklist_walker.php';
+
+		$taxonomy = get_taxonomy( $taxonomy_name );
+		$walker   = new cfs_category_checklist_walker;
+
+		$walker->field_name = $field->input_name;
+		echo '<ul>';
+		wp_terms_checklist(
+			null,
+			array(
+				'taxonomy'      => $taxonomy_name,
+				'walker'        => $walker,
+				'selected_cats' => (array) $field->value,
+			)
+		);
+		echo '</ul>';
 	}
 
 	function pre_save( $value, $field ) {
